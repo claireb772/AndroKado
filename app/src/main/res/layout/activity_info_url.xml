@@ -8,7 +8,7 @@
     tools:context=".InfoUrlActivity">
 
     <TextView
-        android:id="@+id/urlArticle"
+        android:id="@+id/tv_infoUrl_urlArticle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
