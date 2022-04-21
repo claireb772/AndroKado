@@ -1,6 +1,8 @@
 package com.example.androkado;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,15 +22,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        article = new Article("Pain au chocolat", 1f, "Une viennoiserie au beurre et au chocolat", 3, "http://AndroKado/pain_au_chocolat", false);
-        TextView nomProduit = findViewById(R.id.nom_produit);
-        nomProduit.setText(article.getNom());
-        TextView prix = findViewById(R.id.prix_produit);
-        prix.setText(String.format("%s €", article.getPrix()));
-        RatingBar ratingBar = findViewById(R.id.ratingBar);
-        ratingBar.setRating(article.getNote());
-        TextView description = findViewById(R.id.description_produit);
-        description.setText(article.getDescription());
+
+
+//        article = new Article("Pain au chocolat", 1f, "Une viennoiserie au beurre et au chocolat", 3, "http://AndroKado/pain_au_chocolat", false);
+//        TextView nomProduit = findViewById(R.id.nom_produit);
+//        nomProduit.setText(article.getNom());
+//        TextView prix = findViewById(R.id.prix_produit);
+//        prix.setText(String.format("%s €", article.getPrix()));
+//        RatingBar ratingBar = findViewById(R.id.ratingBar);
+//        ratingBar.setRating(article.getNote());
+//        TextView description = findViewById(R.id.description_produit);
+//        description.setText(article.getDescription());
 
     }
 
