@@ -6,12 +6,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
+import com.example.androkado.adapter.ArticleAdapter;
 import com.example.androkado.bo.Article;
 
 import java.util.ArrayList;
 
 public class ListeArticlesActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +38,7 @@ public class ListeArticlesActivity extends AppCompatActivity {
         articles.add(new Article("Babka",1.1f,"une brioche au chocolat",4,"AndroKado/croissant.com", false ));
 
 
-        MyAdapter adapter = new MyAdapter(articles, this );
+        ArticleAdapter adapter = new ArticleAdapter(articles, this );
         rv_articles.setAdapter(adapter);
 
     }

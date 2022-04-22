@@ -17,6 +17,6 @@ public class InfoUrlActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Article article = intent.getParcelableExtra("article");
         TextView tv_urlArticle = findViewById(R.id.tv_infoUrl_urlArticle);
-//        tv_urlArticle.setText(article.getUrl());
+        tv_urlArticle.setText(article.getUrl());
     }
 }

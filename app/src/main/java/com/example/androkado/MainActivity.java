@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -19,20 +20,30 @@ public class MainActivity extends AppCompatActivity {
     public Article article;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_detail, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = getIntent();
+        article = intent.getParcelableExtra("article");
 
-//        article = new Article("Pain au chocolat", 1f, "Une viennoiserie au beurre et au chocolat", 3, "http://AndroKado/pain_au_chocolat", false);
-//        TextView nomProduit = findViewById(R.id.nom_produit);
-//        nomProduit.setText(article.getNom());
-//        TextView prix = findViewById(R.id.prix_produit);
-//        prix.setText(String.format("%s €", article.getPrix()));
-//        RatingBar ratingBar = findViewById(R.id.ratingBar);
-//        ratingBar.setRating(article.getNote());
-//        TextView description = findViewById(R.id.description_produit);
-//        description.setText(article.getDescription());
+        TextView nomProduit = findViewById(R.id.nom_produit);
+        TextView prix = findViewById(R.id.prix_produit);
+        RatingBar ratingBar = findViewById(R.id.ratingBar);
+        TextView description = findViewById(R.id.description_produit);
+        ToggleButton tbAchete = findViewById(R.id.toggleButton_achete);
+
+        nomProduit.setText(article.getNom());
+        prix.setText(String.format("%s €", article.getPrix()));
+        ratingBar.setRating(article.getNote());
+        description.setText(article.getDescription());
+        tbAchete.setChecked(article.isAchete());
 
     }
 
