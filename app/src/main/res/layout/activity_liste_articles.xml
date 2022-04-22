@@ -9,8 +9,18 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_articles"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/toolbard"
+        />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbard"
+        app:title="Androkado"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#3F51B5"
+        app:titleTextColor="@color/white"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

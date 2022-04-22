@@ -1,6 +1,8 @@
 package com.example.androkado;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -8,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -23,6 +26,21 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_detail, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_edit: {
+                Toast.makeText(this, "Modifier", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case R.id.action_send: {
+                Toast.makeText(this, "Partager", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -45,7 +63,11 @@ public class MainActivity extends AppCompatActivity {
         description.setText(article.getDescription());
         tbAchete.setChecked(article.isAchete());
 
+        Toolbar toolbarDetail = findViewById(R.id.toolbard_detail);
+        setSupportActionBar(toolbarDetail);
+
     }
+
 
 
     public void onClickDisplayURL(View view) {

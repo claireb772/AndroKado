@@ -1,12 +1,15 @@
 package com.example.androkado;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.androkado.adapter.ArticleAdapter;
 import com.example.androkado.bo.Article;
@@ -19,6 +22,21 @@ public class ListeArticlesActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add: {
+                Toast.makeText(this, "Ajouter", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case R.id.action_configuration: {
+                Toast.makeText(this, "Configurer", Toast.LENGTH_SHORT).show();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -40,6 +58,9 @@ public class ListeArticlesActivity extends AppCompatActivity {
 
         ArticleAdapter adapter = new ArticleAdapter(articles, this );
         rv_articles.setAdapter(adapter);
+
+        Toolbar toolbar = findViewById(R.id.toolbard);
+        setSupportActionBar(toolbar);
 
     }
 }
