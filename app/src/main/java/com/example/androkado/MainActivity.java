@@ -18,6 +18,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.androkado.bo.Article;
+import com.example.androkado.dal.ArticleDAO;
 
 public class MainActivity extends AppCompatActivity {
     public Article article;
@@ -32,7 +33,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_edit: {
-                Toast.makeText(this, "Modifier", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this,FormActivity.class);
+                intent.putExtra("articleAmodifier", article);
+                startActivity(intent);
                 break;
             }
             case R.id.action_send: {
@@ -48,8 +51,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         Intent intent = getIntent();
         article = intent.getParcelableExtra("article");
+
+
+
+        Toolbar toolbarDetail = findViewById(R.id.toolbard_detail);
+        setSupportActionBar(toolbarDetail);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        ArticleDAO dao = new ArticleDAO(this);
+        article = dao.selectById(article.getId());
 
         TextView nomProduit = findViewById(R.id.nom_produit);
         TextView prix = findViewById(R.id.prix_produit);
@@ -63,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
         description.setText(article.getDescription());
         tbAchete.setChecked(article.isAchete());
 
-        Toolbar toolbarDetail = findViewById(R.id.toolbard_detail);
-        setSupportActionBar(toolbarDetail);
 
     }
 

@@ -21,7 +21,7 @@ public class ArticleDAO {
         db = helper.getWritableDatabase();
     }
 
-    public Article getById(int id){
+    public Article selectById(int id){
         Article article = null;
 
         Cursor cursor =
@@ -47,24 +47,21 @@ public class ArticleDAO {
         return article;
     }
 
-    @SuppressLint("Range")
-    public ArrayList<Article> getAll(Boolean tri){
 
-
+    public ArrayList<Article> selectAll(boolean triActif){
 
         Cursor cursor = null;
 
         ArrayList<Article> articles = new ArrayList<>();
-        if(tri) {
-            cursor =
-                    db.query(ArticleContract.TABLE_NAME,
-                            null, null, null, null, null, ArticleContract.COL_PRIX, null);
-        } else {
-            cursor =
-                    db.query(ArticleContract.TABLE_NAME,
-                            null, null, null, null, null, null, null);
 
-        }
+            cursor =
+                    db.query(ArticleContract.TABLE_NAME,
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            ArticleContract.COL_PRIX, triActif ? ArticleContract.COL_PRIX + " DESC" : null);
 
         while (cursor.moveToNext()){
             Article article = new Article();

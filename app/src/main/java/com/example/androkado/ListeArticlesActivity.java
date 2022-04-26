@@ -25,7 +25,7 @@ import java.util.List;
 public class ListeArticlesActivity extends AppCompatActivity {
 
     private RecyclerView rv_articles;
-    private ArticleDAO dao;
+
 
 
     @Override
@@ -44,10 +44,10 @@ public class ListeArticlesActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbard);
         setSupportActionBar(toolbar);
 
-        dao = new ArticleDAO((this));
-        dao.insert(new Article("Croissant",0.8f,"une viennoiserie",4,"AndroKado/croissant.com", false ));
-        dao.insert(new Article("Pain au raisin",1.2f,"une viennoiserie avec des raisins et de la crème pâtissière",3,"AndroKado/croissant.com", false ));
-        dao.insert(new Article("Babka",1.1f,"une brioche au chocolat",4,"AndroKado/croissant.com", false ));
+//        dao = new ArticleDAO((this));
+//        dao.insert(new Article("Croissant",0.8f,"une viennoiserie",4,"AndroKado/croissant.com", false ));
+//        dao.insert(new Article("Pain au raisin",1.2f,"une viennoiserie avec des raisins et de la crème pâtissière",3,"AndroKado/croissant.com", false ));
+//        dao.insert(new Article("Babka",1.1f,"une brioche au chocolat",4,"AndroKado/croissant.com", false ));
 
     }
 
@@ -55,19 +55,12 @@ public class ListeArticlesActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-
-        //etape de tri
-        //recuperer l'info tri ou non ?
         SharedPreferences sp = getSharedPreferences("pref", MODE_PRIVATE);
         Boolean triActif = sp.getBoolean("triActif", false);
 
-        ArrayList<Article> articles = null;
+        ArticleDAO dao = new ArticleDAO(this);
 
-        if(triActif) {
-            articles = dao.getAll(true);
-        } else {
-            articles = dao.getAll(false);
-        }
+        ArrayList<Article> articles = dao.selectAll(triActif);
 
         ArticleAdapter adapter = new ArticleAdapter(articles, this );
         rv_articles.setAdapter(adapter);

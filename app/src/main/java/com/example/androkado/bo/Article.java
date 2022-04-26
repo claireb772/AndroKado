@@ -35,6 +35,7 @@ public class Article implements Parcelable {
     }
 
     protected Article(Parcel in) {
+        id = in.readInt();
         nom = in.readString();
         prix = in.readFloat();
         description = in.readString();
@@ -45,6 +46,7 @@ public class Article implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
         dest.writeString(nom);
         dest.writeFloat(prix);
         dest.writeString(description);
@@ -128,7 +130,7 @@ public class Article implements Parcelable {
 
     @Override
     public String toString() {
-        return String.format("Article { nom= %s '\'', description= %s '\'', note= %s '\'', url= %s '\'', isAchete= %s }",
+        return String.format("Article { nom= %s, prix=%s, description= %s, note= %s, url= %s, isAchete= %s }",
                 nom, prix, description, note, url, isAchete);
     }
 }
