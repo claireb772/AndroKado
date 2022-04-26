@@ -4,12 +4,16 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Article implements Parcelable {
+    private int id;
     private String nom;
     private float prix;
     private String description;
     private float note;
     private String url;
     private boolean isAchete;
+
+    public Article() {
+    }
 
     public Article(String nom, float prix, String description, float note, String url, boolean isAchete) {
         this.nom = nom;
@@ -20,7 +24,14 @@ public class Article implements Parcelable {
         this.isAchete = isAchete;
     }
 
-    public Article() {
+    public Article(int id, String nom, float prix, String description, float note, String url, boolean isAchete) {
+        this.id = id;
+        this.nom = nom;
+        this.prix = prix;
+        this.description = description;
+        this.note = note;
+        this.url = url;
+        this.isAchete = isAchete;
     }
 
     protected Article(Parcel in) {
@@ -107,6 +118,17 @@ public class Article implements Parcelable {
         isAchete = achete;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    @Override
+    public String toString() {
+        return String.format("Article { nom= %s '\'', description= %s '\'', note= %s '\'', url= %s '\'', isAchete= %s }",
+                nom, prix, description, note, url, isAchete);
+    }
 }

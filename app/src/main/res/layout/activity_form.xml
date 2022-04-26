@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormActivity">
+
+    <TextView
+        android:id="@+id/tv_form_nomArticle"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="Nom"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="50dp"
+        />
+
+    <EditText
+        android:id="@+id/ed_form_nomArticle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="@id/tv_form_nomArticle"
+        app:layout_constraintBottom_toBottomOf="@id/tv_form_nomArticle"
+        app:layout_constraintLeft_toRightOf="@id/tv_form_nomArticle"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="50dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_form_prixArticle"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="Prix"
+        app:layout_constraintTop_toBottomOf="@id/tv_form_nomArticle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        />
+
+    <EditText
+        android:id="@+id/ed_form_prixArticle"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintTop_toTopOf="@id/tv_form_prixArticle"
+        app:layout_constraintBottom_toBottomOf="@id/tv_form_prixArticle"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="50dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_form_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        app:layout_constraintTop_toBottomOf="@id/tv_form_prixArticle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="30dp"
+        />
+
+    <EditText
+        android:id="@+id/ed_form_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="@id/tv_form_description"
+        app:layout_constraintBottom_toBottomOf="@id/tv_form_description"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_form_description"
+        android:layout_marginRight="50dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_form_note"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="Note"
+        app:layout_constraintTop_toBottomOf="@id/ed_form_description"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/rb_form_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:numStars="4"
+        app:layout_constraintTop_toTopOf="@id/tv_form_note"
+        app:layout_constraintBottom_toBottomOf="@id/tv_form_note"
+        android:progressBackgroundTint="#970033CC"
+        android:progressTint="#006DCC"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="50dp"
+        android:isIndicator="false"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_form_url"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:text="URL"
+        app:layout_constraintTop_toBottomOf="@id/tv_form_note"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="30dp"
+        />
+
+    <EditText
+        android:id="@+id/ed_form_url"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        app:layout_constraintTop_toTopOf="@id/tv_form_url"
+        app:layout_constraintBottom_toBottomOf="@id/tv_form_url"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/tv_form_url"
+        android:layout_marginRight="50dp"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Enregistrer"
+        app:layout_constraintTop_toBottomOf="@id/ed_form_url"
+        android:onClick="SaveArticle"
+
+
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
