@@ -1,5 +1,6 @@
 package com.example.androkado;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -50,6 +52,8 @@ public class ListeArticlesActivity extends AppCompatActivity {
 //        dao.insert(new Article("Babka",1.1f,"une brioche au chocolat",4,"AndroKado/croissant.com", false ));
 
     }
+
+
 
     @Override
     protected void onResume() {

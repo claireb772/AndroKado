@@ -3,11 +3,17 @@ package com.example.androkado;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,8 +23,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.example.androkado.adapter.ContactAdapter;
 import com.example.androkado.bo.Article;
+import com.example.androkado.bo.Contact;
 import com.example.androkado.dal.ArticleDAO;
+
+import java.security.Permissions;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     public Article article;
@@ -39,11 +51,50 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
             case R.id.action_send: {
-                Toast.makeText(this, "Partager", Toast.LENGTH_SHORT).show();
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 123);
                 break;
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case 123 : {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                    ArrayList<Contact> contacts = new ArrayList<>();
+
+                    ContentResolver cr = getContentResolver();
+
+                    Cursor cursor = cr.query(
+                            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
+                            null, null, null, null);
+
+                    while (cursor.moveToNext()) {
+
+                        String id = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
+                        String nom = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
+                        String tel = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.CONTENT_URI.getUserInfo()));
+
+                        Contact contact = new Contact(Integer.parseInt(id), nom, tel);
+
+                        contacts.add(contact);
+
+                    }
+
+                    Intent intent = new Intent(this, ContactActivity.class);
+                    intent.putExtra("contacts", contacts);
+                    startActivity(intent);
+       //y a un truc à rajouter là ?
+
+                }
+            }
+        }
+
     }
 
     @Override
