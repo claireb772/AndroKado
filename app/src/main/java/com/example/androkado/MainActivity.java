@@ -26,7 +26,9 @@ import android.widget.ToggleButton;
 import com.example.androkado.adapter.ContactAdapter;
 import com.example.androkado.bo.Article;
 import com.example.androkado.bo.Contact;
+import com.example.androkado.dal.AppDatabase;
 import com.example.androkado.dal.ArticleDAO;
+import com.example.androkado.dal.Connexion;
 
 import java.security.Permissions;
 import java.util.ArrayList;
@@ -116,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
-        ArticleDAO dao = new ArticleDAO(this);
+        AppDatabase db = Connexion.getConnection(this);
+        ArticleDAO dao = db.getArticleDAO();
         article = dao.selectById(article.getId());
 
         TextView nomProduit = findViewById(R.id.nom_produit);

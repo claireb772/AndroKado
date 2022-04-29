@@ -7,109 +7,38 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import androidx.room.Dao;
+import androidx.room.Delete;
+import androidx.room.Insert;
+import androidx.room.Query;
+import androidx.room.Update;
+
 import com.example.androkado.bo.Article;
 import com.example.androkado.contract.ArticleContract;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ArticleDAO {
-    private SQLiteDatabase db;
+@Dao
+public interface ArticleDAO {
 
-    public ArticleDAO(Context context) {
-        BddHelper helper = new BddHelper(context);
-        db = helper.getWritableDatabase();
-    }
+    @Query("SELECT * FROM articles WHERE id =:id")
+    Article selectById(int id);
 
-    public Article selectById(int id){
-        Article article = null;
+    @Query("SELECT * FROM articles order by (:triActif)")
+    List<Article> selectAllSorted(boolean triActif);
 
-        Cursor cursor =
-                db.query(ArticleContract.TABLE_NAME,
-                        null,
-                        ArticleContract.COL_ID + " =?",
-                        new String[]{String.valueOf(id)},
-                        null,null,null);
+    @Query("SELECT * FROM articles")
+    List<Article> selectAll();
 
-        if (cursor.moveToNext()){
-            article = new Article();
-            article.setId(cursor.getInt(cursor.getColumnIndexOrThrow(ArticleContract.COL_ID)));
-            article.setNom(cursor.getString(cursor.getColumnIndexOrThrow(ArticleContract.COL_NOM)));
-            article.setPrix(cursor.getFloat(cursor.getColumnIndexOrThrow(ArticleContract.COL_PRIX)));
-            article.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(ArticleContract.COL_DESCRIPTION)));
-            article.setNote(cursor.getFloat(cursor.getColumnIndexOrThrow(ArticleContract.COL_NOTE)));
-            article.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(ArticleContract.COL_URL)));
-            article.setAchete(cursor.getInt(cursor.getColumnIndexOrThrow(ArticleContract.COL_ISACHETE)) != 0);
+    @Insert
+    void insert(Article... articles);
 
-        }
+    @Update
+    void update(Article article);
 
-        cursor.close();
-        return article;
-    }
+    @Delete
+    void delete(Article article);
 
-
-    public ArrayList<Article> selectAll(boolean triActif){
-
-        Cursor cursor = null;
-
-        ArrayList<Article> articles = new ArrayList<>();
-
-            cursor =
-                    db.query(ArticleContract.TABLE_NAME,
-                            null,
-                            null,
-                            null,
-                            null,
-                            null,
-                            ArticleContract.COL_PRIX, triActif ? ArticleContract.COL_PRIX + " DESC" : null);
-
-        while (cursor.moveToNext()){
-            Article article = new Article();
-            article.setId(cursor.getInt(cursor.getColumnIndexOrThrow(ArticleContract.COL_ID)));
-            article.setNom(cursor.getString(cursor.getColumnIndexOrThrow(ArticleContract.COL_NOM)));
-            article.setPrix(cursor.getFloat(cursor.getColumnIndexOrThrow(ArticleContract.COL_PRIX)));
-            article.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(ArticleContract.COL_DESCRIPTION)));
-            article.setNote(cursor.getFloat(cursor.getColumnIndexOrThrow(ArticleContract.COL_NOTE)));
-            article.setUrl(cursor.getString(cursor.getColumnIndexOrThrow(ArticleContract.COL_URL)));
-            article.setAchete(cursor.getInt(cursor.getColumnIndexOrThrow(ArticleContract.COL_ISACHETE)) != 0);
-
-            articles.add(article);
-        }
-        cursor.close();
-        return articles;
-
-    }
-
-    public void insert(Article article) {
-        ContentValues cv = new ContentValues();
-        cv.put(ArticleContract.COL_NOM, article.getNom());
-        cv.put(ArticleContract.COL_PRIX, article.getPrix());
-        cv.put(ArticleContract.COL_DESCRIPTION, article.getDescription());
-        cv.put(ArticleContract.COL_NOTE, article.getNote());
-        cv.put(ArticleContract.COL_URL, article.getUrl());
-        cv.put(ArticleContract.COL_ISACHETE, article.isAchete());
-        db.insert(ArticleContract.TABLE_NAME,null,cv);
-
-    }
-
-    public void update(Article article) {
-        ContentValues cv = new ContentValues();
-        cv.put(ArticleContract.COL_NOM, article.getNom());
-        cv.put(ArticleContract.COL_PRIX, article.getPrix());
-        cv.put(ArticleContract.COL_DESCRIPTION, article.getDescription());
-        cv.put(ArticleContract.COL_NOTE, article.getNote());
-        cv.put(ArticleContract.COL_URL, article.getUrl());
-        cv.put(ArticleContract.COL_ISACHETE, article.isAchete());
-
-        db.update(ArticleContract.TABLE_NAME, cv,
-                ArticleContract.COL_ID + " = ?",
-                new String[]{String.valueOf(article.getId())});
-    }
-
-    public void delete(Article article){
-        db.delete(ArticleContract.TABLE_NAME,
-                ArticleContract.COL_ID + " = ?",
-                new String[]{String.valueOf(article.getId())});
-    }
 
 }

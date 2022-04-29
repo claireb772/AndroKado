@@ -19,13 +19,13 @@ public class ContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        Intent intent = getIntent();
-        contactArecup = intent.getParcelableExtra("contacts");
-
-        nomContact = findViewById(R.id.tv_contactNom);
-        nomContact.setText(contactArecup.getNomAmis());
-        numTel = findViewById(R.id.tv_contactNumeroTel);
-        numTel.setText(contactArecup.getNumberTel());
+//        Intent intent = getIntent();
+//        contactArecup = intent.getParcelableExtra("contacts");
+//
+//        nomContact = findViewById(R.id.tv_contactNom);
+//        nomContact.setText(contactArecup.getNomAmis());
+//        numTel = findViewById(R.id.tv_contactNumeroTel);
+//        numTel.setText(contactArecup.getNumberTel());
 
 
     }

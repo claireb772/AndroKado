@@ -10,10 +10,11 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 
 import com.example.androkado.bo.Article;
+import com.example.androkado.dal.AppDatabase;
 import com.example.androkado.dal.ArticleDAO;
+import com.example.androkado.dal.Connexion;
 
 public class FormActivity extends AppCompatActivity {
-    private ArticleDAO dao;
     private EditText prixArticle;
     private Article articleRecuperer;
     private EditText nomArticle;
@@ -68,7 +69,8 @@ public class FormActivity extends AppCompatActivity {
         article.setNote(rb.getRating());
         article.setUrl(urlArticle.getText().toString());
 
-        dao = new ArticleDAO((this));
+        AppDatabase db = Connexion.getConnection(this);
+        ArticleDAO dao = db.getArticleDAO();
 
         if(articleRecuperer != null) {
             article.setId(articleRecuperer.getId());

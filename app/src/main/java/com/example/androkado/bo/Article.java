@@ -3,36 +3,55 @@ package com.example.androkado.bo;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "articles")
 public class Article implements Parcelable {
+
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
+    @ColumnInfo(name = "nom")
     private String nom;
+
+    @ColumnInfo(name = "prix")
     private float prix;
+
+    @ColumnInfo(name = "description")
     private String description;
+
+    @ColumnInfo(name = "note")
     private float note;
+
+    @ColumnInfo(name = "url")
     private String url;
+
+    @ColumnInfo(name = "isAchete")
     private boolean isAchete;
 
     public Article() {
     }
-
-    public Article(String nom, float prix, String description, float note, String url, boolean isAchete) {
-        this.nom = nom;
-        this.prix = prix;
-        this.description = description;
-        this.note = note;
-        this.url = url;
-        this.isAchete = isAchete;
-    }
-
-    public Article(int id, String nom, float prix, String description, float note, String url, boolean isAchete) {
-        this.id = id;
-        this.nom = nom;
-        this.prix = prix;
-        this.description = description;
-        this.note = note;
-        this.url = url;
-        this.isAchete = isAchete;
-    }
+//
+//    public Article(String nom, float prix, String description, float note, String url, boolean isAchete) {
+//        this.nom = nom;
+//        this.prix = prix;
+//        this.description = description;
+//        this.note = note;
+//        this.url = url;
+//        this.isAchete = isAchete;
+//    }
+//
+//    public Article(int id, String nom, float prix, String description, float note, String url, boolean isAchete) {
+//        this.id = id;
+//        this.nom = nom;
+//        this.prix = prix;
+//        this.description = description;
+//        this.note = note;
+//        this.url = url;
+//        this.isAchete = isAchete;
+//    }
 
     protected Article(Parcel in) {
         id = in.readInt();

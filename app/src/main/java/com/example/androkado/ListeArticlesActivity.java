@@ -18,7 +18,9 @@ import android.widget.Toast;
 
 import com.example.androkado.adapter.ArticleAdapter;
 import com.example.androkado.bo.Article;
+import com.example.androkado.dal.AppDatabase;
 import com.example.androkado.dal.ArticleDAO;
+import com.example.androkado.dal.Connexion;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -62,13 +64,19 @@ public class ListeArticlesActivity extends AppCompatActivity {
         SharedPreferences sp = getSharedPreferences("pref", MODE_PRIVATE);
         Boolean triActif = sp.getBoolean("triActif", false);
 
-        ArticleDAO dao = new ArticleDAO(this);
+        new Thread(() -> {
+        AppDatabase db = Connexion.getConnection(this);
+        ArticleDAO dao = db.getArticleDAO();
+        List<Article> articles = new ArrayList<>();
+        if(triActif) {
+           articles = dao.selectAllSorted(triActif);
+        } else {
+            articles = dao.selectAll();
+        }
 
-        ArrayList<Article> articles = dao.selectAll(triActif);
-
-        ArticleAdapter adapter = new ArticleAdapter(articles, this );
+        ArticleAdapter adapter = new ArticleAdapter((ArrayList<Article>) articles, this );
         rv_articles.setAdapter(adapter);
-
+        }).start();
 
     }
 
